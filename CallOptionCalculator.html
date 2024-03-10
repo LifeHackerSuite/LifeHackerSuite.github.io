@@ -12,6 +12,7 @@
         button { padding: .5em 1em; background-color: #007bff; color: white; border: none; cursor: pointer; }
         button:hover { background-color: #0056b3; }
         .result { margin-top: 20px; }
+        .disclaimer { margin-top: 40px; font-size: 0.85em; color: #666; }
     </style>
 </head>
 <body>
@@ -50,6 +51,15 @@
         <div class="result" id="premiumCalculationResult"></div>
     </div>
 
+    <!-- Disclaimer -->
+    <div class="disclaimer">
+        <p><strong>Disclaimer:</strong></p>
+        <ol>
+            <li>The developer has no knowledge or license to guide invest, so please use on your cautions.</li>
+            <li>This calculator is only developed for in the money call options, and we never tested or tried covering other scenarios.</li>
+        </ol>
+    </div>
+
     <script>
         function calculateTimeValueAndRate() {
             const stockPrice = parseFloat(document.getElementById('stockPrice').value);
@@ -64,7 +74,7 @@
             const annualizedRate = (timeValue / intrinsicValue) * (365 / timeToExpiration) * 100;
 
             document.getElementById('calculationResult').innerHTML = `Time Value: $${timeValue.toFixed(2)}<br>` +
-                `Mortgage Rate: ${annualizedRate.toFixed(2)}%`;
+                `"Mortgage Rate": ${annualizedRate.toFixed(2)}%`;
         }
 
         function calculateRequiredPremium() {
@@ -76,12 +86,12 @@
             const timeToExpiration = (exerciseDate - today) / (1000 * 60 * 60 * 24);
 
             const intrinsicValue = Math.max(0, stockPrice - strikePrice);
-            const deferredAmount = intrinsicValue * 100;
+            const deferredAmount = intrinsicValue * 100; 
             const upfrontPayment = targetRate * (deferredAmount / 365) * timeToExpiration;
             const targetTimeValue = upfrontPayment / 100;
             const requiredPremium = intrinsicValue + targetTimeValue;
 
-            document.getElementById('premiumCalculationResult').innerHTML = 
+            document.getElementById('premiumCalculationResult').innerHTML =
                 `Required Premium: $${requiredPremium.toFixed(2)}`;
         }
     </script>
