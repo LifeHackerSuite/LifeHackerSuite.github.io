@@ -74,7 +74,7 @@
             const annualizedRate = (timeValue / intrinsicValue) * (365 / timeToExpiration) * 100;
 
             document.getElementById('calculationResult').innerHTML = `Time Value: $${timeValue.toFixed(2)}<br>` +
-                `"Mortgage Rate": ${annualizedRate.toFixed(2)}%`;
+                `Mortgage Rate: ${annualizedRate.toFixed(2)}%`;
         }
 
         function calculateRequiredPremium() {
