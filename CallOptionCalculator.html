@@ -17,39 +17,37 @@
 <body>
     <div class="container">
         <h2>Call Option Calculator</h2>
-        <!-- Input form for time value and mortgage rate calculation -->
-        <div>
-            <h3>Calculate Time Value and Mortgage Rate</h3>
-            <div class="form-group">
-                <label for="stockPrice">Current Stock Price</label>
-                <input type="text" id="stockPrice" placeholder="Enter current stock price">
-            </div>
-            <div class="form-group">
-                <label for="strikePrice">Strike Price</label>
-                <input type="text" id="strikePrice" placeholder="Enter strike price">
-            </div>
-            <div class="form-group">
-                <label for="premium">Premium Paid</label>
-                <input type="text" id="premium" placeholder="Enter premium paid">
-            </div>
-            <div class="form-group">
-                <label for="exerciseDate">Exercise Date</label>
-                <input type="date" id="exerciseDate">
-            </div>
-            <button onclick="calculateTimeValueAndRate()">Calculate</button>
-            <div class="result" id="calculationResult"></div>
+        <!-- Shared Inputs -->
+        <div class="form-group">
+            <label for="stockPrice">Current Stock Price</label>
+            <input type="text" id="stockPrice" placeholder="Enter current stock price">
+        </div>
+        <div class="form-group">
+            <label for="strikePrice">Strike Price</label>
+            <input type="text" id="strikePrice" placeholder="Enter strike price">
+        </div>
+        <div class="form-group">
+            <label for="exerciseDate">Exercise Date</label>
+            <input type="date" id="exerciseDate">
         </div>
 
-        <!-- Input form for premium calculation based on target mortgage rate -->
-        <div>
-            <h3>Calculate Required Premium for Target Mortgage Rate</h3>
-            <div class="form-group">
-                <label for="targetRate">Target Mortgage Rate (%)</label>
-                <input type="number" id="targetRate" placeholder="Enter target mortgage rate">
-            </div>
-            <button onclick="calculateRequiredPremium()">Calculate Premium</button>
-            <div class="result" id="premiumCalculationResult"></div>
+        <!-- Calculator 1: Calculate Time Value and Mortgage Rate -->
+        <h3>Calculator 1: Time Value and Mortgage Rate</h3>
+        <div class="form-group">
+            <label for="premium">Premium Paid</label>
+            <input type="text" id="premium" placeholder="Enter premium paid">
         </div>
+        <button onclick="calculateTimeValueAndRate()">Calculate</button>
+        <div class="result" id="calculationResult"></div>
+
+        <!-- Calculator 2: Calculate Required Premium for Target Mortgage Rate -->
+        <h3>Calculator 2: Required Premium for Target Mortgage Rate</h3>
+        <div class="form-group">
+            <label for="targetRate">Target Mortgage Rate (%)</label>
+            <input type="number" id="targetRate" placeholder="Enter target mortgage rate">
+        </div>
+        <button onclick="calculateRequiredPremium()">Calculate Premium</button>
+        <div class="result" id="premiumCalculationResult"></div>
     </div>
 
     <script>
@@ -66,7 +64,7 @@
             const annualizedRate = (timeValue / intrinsicValue) * (365 / timeToExpiration) * 100;
 
             document.getElementById('calculationResult').innerHTML = `Time Value: $${timeValue.toFixed(2)}<br>` +
-                `"Mortgage Rate": ${annualizedRate.toFixed(2)}%`;
+                `Mortgage Rate: ${annualizedRate.toFixed(2)}%`;
         }
 
         function calculateRequiredPremium() {
