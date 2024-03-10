@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Option Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .form-group { margin-bottom: 1em; }
+        label { display: block; margin-bottom: .5em; }
+        input[type="text"], input[type="date"] { width: 100%; padding: .5em; }
+        button { padding: .5em 1em; background-color: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        .result { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Call Option Calculator</h2>
+        <div class="form-group">
+            <label for="stockPrice">Current Stock Price</label>
+            <input type="text" id="stockPrice" placeholder="Enter current stock price">
+        </div>
+        <div class="form-group">
+            <label for="strikePrice">Strike Price</label>
+            <input type="text" id="strikePrice" placeholder="Enter strike price">
+        </div>
+        <div class="form-group">
+            <label for="premium">Premium Paid</label>
+            <input type="text" id="premium" placeholder="Enter premium paid">
+        </div>
+        <div class="form-group">
+            <label for="exerciseDate">Exercise Date</label>
+            <input type="date" id="exerciseDate">
+        </div>
+        <button onclick="calculate()">Calculate</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculate() {
+            const stockPrice = parseFloat(document.getElementById('stockPrice').value);
+            const strikePrice = parseFloat(document.getElementById('strikePrice').value);
+            const premium = parseFloat(document.getElementById('premium').value);
+            const exerciseDate = new Date(document.getElementById('exerciseDate').value);
+            const today = new Date();
+            const timeToExpiration = (exerciseDate - today) / (1000 * 60 * 60 * 24);
+
+            const intrinsicValue = Math.max(0, stockPrice - strikePrice);
+            const timeValue = Math.max(0, premium - intrinsicValue);
+            const annualizedRate = (timeValue / intrinsicValue) * (365 / timeToExpiration) * 100;
+
+            document.getElementById('result').innerHTML = `Time Value: $${timeValue.toFixed(2)}<br>` +
+                `"Mortgage Rate": ${annualizedRate.toFixed(2)}%`;
+        }
+    </script>
+</body>
+</html>
